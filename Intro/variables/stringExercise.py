@@ -24,22 +24,21 @@ print(insertMiddle("|||", "Hello"))
 # 3 Write a Python program to display a number with a comma separator
 # e.g. func("11023") -> "11,023"
 
-######## UNFINISHED, HAVE PROBLEMS
-
 
 def addSeperator(string: str):
     result = ""
-    last = len(string)
-    if string.isdigit():
-        for i in range(len(string), -1, -1):
-            if (i) % 3 == 0:
-                result = ","+string[i:last]+result
-                last = i
-        return result
-    return False
+    for c, i in enumerate(reversed(string)):
+        print(c, i)
+        if (c+1) % 3 == 0:
+            result = ","+i+result
+        else:
+            result = i+result
+    if result[0] == ",":
+        result = result[1:]
+    return result
 
 
-print(addSeperator("2342343411022"))
+print(addSeperator("222222342343411022"))
 #4 Write a Python program to move spaces to the front of a given string
 # e.g. func("hi hi hi hi")-> "   hihihihi"
 
@@ -66,3 +65,19 @@ def stringNumSum(string: str):
 
 print(stringNumSum("12345"))
 # 6 Write a Python program to dtermine if a set of parenthesis are balanced, so (()), no )() or (()
+
+
+def brackletCheck(string: str):
+    result = ""
+    for i in string:
+        if i == "(":
+            result += "("
+        if i == ")":
+            result += ")"
+        result = result.replace("()", "")
+    if len(result) == 0:
+        return True
+    return False
+
+
+print(brackletCheck("((aaaaaaaaaaaaaaaaa))()()"))

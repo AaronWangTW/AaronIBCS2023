@@ -25,20 +25,19 @@ print(insertMiddle("|||", "Hello"))
 # e.g. func("11023") -> "11,023"
 
 
-def addSeperator(string: str):
+def addSeperator(string: str, divider:int=3, seperator:str=","):
     result = ""
     for c, i in enumerate(reversed(string)):
-        print(c, i)
-        if (c+1) % 3 == 0:
-            result = ","+i+result
+        if (c+1) % divider == 0:
+            result = seperator+i+result
         else:
             result = i+result
-    if result[0] == ",":
+    if result[0] == seperator:
         result = result[1:]
     return result
 
 
-print(addSeperator("222222342343411022"))
+print(addSeperator("222222342343411022",3,"."))
 #4 Write a Python program to move spaces to the front of a given string
 # e.g. func("hi hi hi hi")-> "   hihihihi"
 
@@ -80,4 +79,4 @@ def brackletCheck(string: str):
     return False
 
 
-print(brackletCheck("((aaaaaaaaaaaaaaaaa))()()"))
+print(brackletCheck(")((aaaaaaaaaaaaaaaaa))(asdflkasjdofjaosdjfo)()"))

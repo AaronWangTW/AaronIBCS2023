@@ -7,7 +7,7 @@ def factorial(num: int) -> int:
         return result
     elif num == 0:
         return 1
-    return False
+    return -1 
 
 
 print(factorial(5))
@@ -40,7 +40,7 @@ print(nCr(10, 10))
 
 def pascalsTriangle(row: int) -> list:
     layer = [1]
-    result = []
+    result = [[1]]
     for _ in range(row):
         temp = []
         for j in range(len(layer)):
@@ -100,8 +100,9 @@ print(collect)
 
 
 # Pascal Triangle, but Generator, returns next row each time
-def pascalTriangleGen(row:int)->list:
+def pascalTriangleGen(row: int) -> list:
     layer = [1]
+    yield layer
     for _ in range(row):
         temp = []
         for j in range(len(layer)):
@@ -112,8 +113,10 @@ def pascalTriangleGen(row:int)->list:
         temp += [1]
         layer = temp.copy()
         yield temp
-triangle=pascalTriangleGen(3)
-collect=[]
-for i in range(3):
+
+
+triangle = pascalTriangleGen(5)
+collect = []
+for i in range(5):
     collect.append(next(triangle))
 print(collect)

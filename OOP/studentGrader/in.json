@@ -26,14 +26,6 @@
             "subjectEnrolled": [
                 "Computer Science"
             ]
-        },
-        "4": {
-            "id": 4,
-            "givenName": "Albert",
-            "familyName": "Wang",
-            "subjectEnrolled": [
-                "Computer Science"
-            ]
         }
     },
     "subjects": {
@@ -50,8 +42,7 @@
             "students": [
                 1,
                 2,
-                3,
-                4
+                3
             ],
             "assignments": {
                 "Student Grader": {
@@ -60,8 +51,7 @@
                     "studentGrades": {
                         "1": 68.9,
                         "2": 69.42,
-                        "3": 79.5,
-                        "4": 99.0
+                        "3": 79.5
                     }
                 }
             }

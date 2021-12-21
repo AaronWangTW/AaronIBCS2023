@@ -1,0 +1,42 @@
+3 classes:
+    student
+    assignment
+    subject
+
+A subject has multiple students and assignments
+A student can be in multiple subjects
+each student in a subject will have one of every assignment
+
+student 
+    ID
+    given name
+    family name
+    enrolled subjects
+
+    getAssignmentFromSubject(subjectName):
+        get subject from enrolled
+        call subject.getAssignmentForStudent(self.id)
+    show grades() -> list of grade for each subject:
+        for subject in enrolled:
+            subject.get student overall score
+
+subject
+    subject name
+    students[]
+    assignments[]
+
+    getAssignmentForStudent(studentID)
+    get student overall score (studentID)
+
+assignment
+    assignmentName
+    max marks
+    student marks {
+        studentID : mark
+    }
+
+    get mean() -> float
+    get range() -> float
+    get below(mark) -> subdict of student marks
+    get above(mark) -> subdict of student marks
+    get student marks(studentID)

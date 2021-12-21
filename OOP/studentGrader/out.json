@@ -1,0 +1,67 @@
+{
+    "students": {
+        "1": {
+            "id": 1,
+            "givenName": "Preston",
+            "familyName": "Ku",
+            "subjectEnrolled": [
+                "Computer Science",
+                "Math"
+            ]
+        },
+        "2": {
+            "id": 2,
+            "givenName": "Aaron",
+            "familyName": "Wang",
+            "subjectEnrolled": [
+                "Computer Science",
+                "Math",
+                "Economics"
+            ]
+        },
+        "3": {
+            "id": 3,
+            "givenName": "Rebecca",
+            "familyName": "Chen",
+            "subjectEnrolled": [
+                "Computer Science"
+            ]
+        }
+    },
+    "subjects": {
+        "Math": {
+            "name": "Math",
+            "students": [
+                1,
+                2
+            ],
+            "assignments": {}
+        },
+        "Computer Science": {
+            "name": "Computer Science",
+            "students": [
+                1,
+                2,
+                3
+            ],
+            "assignments": {
+                "Student Grader": {
+                    "name": "Student Grader",
+                    "maxMark": 100,
+                    "studentGrades": {
+                        "1": 68.9,
+                        "2": 69.42,
+                        "3": 79.5
+                    }
+                }
+            }
+        },
+        "Economics": {
+            "name": "Economics",
+            "students": [
+                2
+            ],
+            "assignments": {}
+        }
+    }
+}

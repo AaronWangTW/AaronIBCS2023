@@ -1,6 +1,5 @@
 import classes
 import json
-import os
 
 
 def test():
@@ -30,16 +29,30 @@ def test():
     print(json.dumps(dict, sort_keys=True, indent=4))
 
 
+def unexpectedTest(grader):
+    grader.addAssignment("Global Politics", classes.Assignment("what"))
+
+
 def main():
     grader = classes.StudentGrader()
     grader.readFile(
-        "C:/Users/user/Documents/GitHub/AaronIBCS2023/OOP/studentGrader/in.json")
-    print(grader.toDict())
-    newStudent=classes.Student(4,"Albert","Wang",[s for s in grader.subjects if s.name=="Computer Science"])
-    grader.addStudent(newStudent)
-    grader.addStudentToSubject(newStudent,[s for s in grader.subjects if s.name=="Computer Science"][0])
-    grader.writeFile("C:/Users/user/Documents/GitHub/AaronIBCS2023/OOP/studentGrader/out.json")
+        "in.json")
+    #print(grader.toDict())
+    newStudent = classes.Student(4, "Albert", "Wang", [
+                                 s for s in grader.subjects if s.name == "Computer Science"])
+    try:
+        grader.addStudent(newStudent)
+        grader.addStudentToSubject(
+            newStudent, [s for s in grader.subjects if s.name == "Computer Science"][0])
+    except classes.StudentAlreadyAddedException as e:
+        print("Error:", e.message)
+    except classes.SubjectNotEnrolledException as e:
+        print("Error:", e.message)
+    grader.writeFile("out.json")
+    return grader
+
 
 if __name__ == "__main__":
-    main()
+    grader = main()
+    #unexpectedTest(grader)
     #test()

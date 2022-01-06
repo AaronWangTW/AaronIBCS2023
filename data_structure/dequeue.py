@@ -1,5 +1,8 @@
 # queue is FIFO, first in first out
 # dequeue is both side ok to modify data structure
+from typing import Iterator
+
+
 class Node:
     def __init__(self, data: int) -> None:
         self.data: int = data
@@ -71,6 +74,14 @@ class Dequeue:
         self._iter = self._iter.next
         return temp
 
+    def __reversed__(self) -> Iterator:
+        def reverseIterator():
+            r_iter = self._tail
+            while r_iter:
+                yield r_iter.data
+                r_iter = r_iter.prev
+        return reverseIterator()
+
     def __contains__(self, data: int) -> bool:
         for d in self:
             if d == data:
@@ -110,3 +121,8 @@ if __name__ == "__main__":
 
     for i in range(6):
         print(f"delete last: {q.deleteLast()}\t Length: {len(q)}")
+
+    for i in range(1, 6):
+        q.append(i)
+    print("normal",[x for x in q])
+    print("reversed",[x for x in reversed(q)])

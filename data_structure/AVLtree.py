@@ -1,6 +1,5 @@
-from io import DEFAULT_BUFFER_SIZE
 from typing import Callable
-from os import TMP_MAX, linesep
+from os import linesep
 
 
 class Node:
@@ -11,7 +10,7 @@ class Node:
         self.height: int = 0
 
 
-class BinarySearchTree:
+class AVLTree:
     def __init__(self) -> None:
         self._root: Node = None
         self._length: int = 0
@@ -37,7 +36,7 @@ class BinarySearchTree:
                 yield from reversedGenerator(root.left)
         return reversedGenerator(self._root)
 
-    def __contains__(self,data:int) -> bool:
+    def __contains__(self, data: int) -> bool:
         root = self._root
         while root:
             if data < root.data:
@@ -47,7 +46,7 @@ class BinarySearchTree:
             else:
                 return True
         return False
-    
+
     def max(self) -> int:
         if self._root is None:
             return None
@@ -73,6 +72,50 @@ class BinarySearchTree:
         root.height = max(self._height(root.left), self._height(root.right))+1
         return root.height
 
+    def _getBalance(self, root: Node = None) -> int:
+        if root is None:
+            return 0
+        return self._height(root.left) - self._height(root.right)
+
+    def _rebalance(self, root: Node = None) -> Node:
+        if root is None:
+            return None
+        balance = self._getBalance(root)
+        leftBalance = self._getBalance(root.left)
+        rightBalance = self._getBalance(root.right)
+
+        if balance > 1:
+            if leftBalance >= 0:
+                return self._rotateRight(root)
+            else:
+                root.left = self._rotateLeft(root.left)
+                return self._rotateRight(root)
+        elif balance < -1:
+            if rightBalance > 0:
+                root.right = self._rotateRight(root.right)
+                return self._rotateLeft(root)
+            else:
+                return self._rotateLeft(root)
+
+        return root
+
+    def _rotateRight(self, root: Node) -> Node:
+        newRoot = root.left
+        rightSubtree = newRoot.right
+        newRoot.right = root
+        root.left = rightSubtree
+        self._height(newRoot)
+        return newRoot
+
+    def _rotateLeft(self, root: Node) -> Node:
+        newRoot = root.right
+        leftSubtree = newRoot.left
+        newRoot.left = root
+        root.right = leftSubtree
+
+        self._height(newRoot)
+        return newRoot
+
     def insert(self, data: int) -> None:
         self._root = self._insert(data, self._root)
 
@@ -86,7 +129,7 @@ class BinarySearchTree:
             root.right = self._insert(data, root.right)
 
         self._height(root)
-        return root
+        return self._rebalance(root)
 
     def delete(self, data: int) -> None:
         self._delete(data, self._root)
@@ -120,7 +163,7 @@ class BinarySearchTree:
             temp = self._minNode(root.right)
             root.data = temp.data
             root.right = self._delete(temp.data, root.right)
-        return root
+        return self._rebalance(root)
 
 
 def treePrinter(root: Node, dataFunc: Callable, width: int = 64):
@@ -161,37 +204,9 @@ def treePrinter(root: Node, dataFunc: Callable, width: int = 64):
 
 
 if __name__ == "__main__":
-    bst = BinarySearchTree()
-    bst.insert(3)
-    bst.insert(1)
-    bst.insert(7)
-    bst.insert(6)
-    bst.insert(0)
-    bst.insert(11)
-    bst.insert(13)
-    bst.insert(4)
+    avl = AVLTree()
 
-    print("normal:", [v for v in bst])
-    print("reversed:", [v for v in reversed(bst)])
-    print("length:", len(bst))
-    print("height:", bst.height())
-    print("layers:", bst.height()+1)
-
-    print("original tree")
-    print(treePrinter(bst._root, lambda x: x.data))
-    print("original tree's each node height")
-    print(treePrinter(bst._root, lambda x: x.height))
-
-    print("delete test")
-    bst.delete(6)
-    print(treePrinter(bst._root, lambda x: x.data))
-    bst.delete(3)
-    print(treePrinter(bst._root, lambda x: x.data))
-
-    print("max:",bst.max())
-    print("min:",bst.min())
-
-    print("contains 7:", (7 in bst))
-    print("contains 420:", (420 in bst))
-
-    print("list comprehension:",[v for v in bst])
+    for i in range(6):
+        avl.insert(i)
+        print(treePrinter(avl._root, lambda x: x.data))
+        print("---------------------------------------------------------------")

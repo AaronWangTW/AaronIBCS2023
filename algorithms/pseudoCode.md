@@ -52,3 +52,25 @@
 ### Flow Chart
 ![](FlowCharts/SelectionSort.drawio.png)  
 (See image "SelectionSort.drawio.png" if not used in local environment)
+
+## Insertion Sort
+
+### Pseudo Code
+    
+    i = 0
+    j = 0
+    key = 0
+    array = [0,5,3,2,7,9]  
+    loop i from 1 to array.length-1
+        key = array[i]
+        j = i+1
+        while j >= 0 and key < array[j]
+            array[j+1] = array[j]
+            j = j-1
+        end while
+        array[j+1] = key
+    end loop
+
+### Flow Chart
+![](FlowCharts/InsertionSort.drawio.png)  
+(See image "InsertionSort.drawio.png" if not used in local environment)

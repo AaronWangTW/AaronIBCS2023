@@ -7,6 +7,7 @@
 
 
 
+
         {
             "name": "Blocking TCP Server",
             "type": "python",
@@ -52,6 +53,22 @@
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/networking/non-blocking/tcpSelectorServer.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Async Echo Server",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/networking/non-blocking/asyncEchoServer.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Async Echo Client",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/networking/non-blocking/asyncEchoClient.py",
             "console": "integratedTerminal",
             "justMyCode": true
         }

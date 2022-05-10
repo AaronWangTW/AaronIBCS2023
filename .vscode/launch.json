@@ -8,6 +8,7 @@
 
 
 
+
         {
             "name": "Blocking TCP Server",
             "type": "python",
@@ -69,6 +70,22 @@
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/networking/non-blocking/asyncEchoClient.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Async Chat Server",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/networking/non-blocking/asyncChatServer.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Async Chat Client",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/networking/non-blocking/asyncChatClient.py",
             "console": "integratedTerminal",
             "justMyCode": true
         }
